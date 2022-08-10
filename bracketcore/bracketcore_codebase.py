@@ -1,11 +1,8 @@
 from __future__ import annotations
-import dataclasses as _dataclasses
-from enum import unique
-import json
-import timeit, random, itertools
-from types import NoneType
-from typing import Any, Callable, Generator, Optional, Sequence, overload
+from typing     import Any, Callable, Generator, Optional, overload
 from .make_repr import make_repr
+
+import json, random, itertools
 
 
 def none_filter(item) -> bool:
