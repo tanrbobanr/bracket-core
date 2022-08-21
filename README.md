@@ -139,15 +139,27 @@ def swiss_2_rounds() -> BracketModel:
         (-1, lambda: BR.df.rgd), # first sorting by game differential (descending)
         (1, lambda: BR.sg) # then sorting by the initial seeding (ascending)
     ]
-    BR.next("round_1", MatchSet(lambda: BR.sg, SeedingInterpreter.reversed))
-    BR.next("round_2_high", MatchSet(
-        lambda: BR["round_1"].result_.winners.sort(*sorts),
-        SeedingInterpreter.reversed
-    ))
-    BR.next("round_2_low", MatchSet(
-        lambda: BR["round_1"].result_.losers.sort(*sorts),
-        SeedingInterpreter.reversed
-    ))
+    BR.next(
+        "round_1",
+        MatchSet(
+            lambda: BR.sg,
+            SeedingInterpreter.reversed
+        )
+    )
+    BR.next(
+        "round_2_high",
+        MatchSet(
+           lambda: BR["round_1"].result_.winners.sort(*sorts),
+           SeedingInterpreter.reversed
+        )
+    )
+    BR.next(
+        "round_2_low",
+        MatchSet(
+            lambda: BR["round_1"].result_.losers.sort(*sorts),
+            SeedingInterpreter.reversed
+        )
+    )
     return BR
 
 model = swiss_2_rounds()
